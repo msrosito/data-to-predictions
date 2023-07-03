@@ -79,7 +79,7 @@ We are in search of the minimum for the cost function, understanding that the gr
 # ╔═╡ 66731281-0ad9-4595-84e8-1b2cd86e0a58
 md"""
 #### Gradient
-In Julia, you can leverage the Zigote library, which offers a convenient function for automatic gradient calculation	
+In Julia, you can leverage the Zygote library, which offers a convenient function for automatic gradient calculation	
 """
 
 # ╔═╡ d57ee09a-ee03-4647-9bde-75aa3606634c
