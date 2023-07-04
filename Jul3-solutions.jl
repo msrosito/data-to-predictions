@@ -45,7 +45,7 @@ md"""
 begin
 	A = rand(2, 2) # returns a 2 x 2 array of random numbers between 0 and 1
 	B = rand(2, 3) # returns a 2 x 3 array of random numbers between 0 and 1
-	mat_mul(A, B)
+	A, B, mat_mul(A, B)
 end
 
 # ╔═╡ c0465105-dc3c-4e02-befe-a8292ad791d7
@@ -122,6 +122,12 @@ begin
 	pX2, pY2
 end
 
+# ╔═╡ 2c5522ad-35a0-4b93-969a-3c9c38c86de4
+md"""
+###### Task 3: Rewrite the function **covariance** in the notebook VerySimpleExample.jl
+###### The new function should not require pX and pY
+"""
+
 # ╔═╡ 960f0a20-84ab-413d-b85d-47e9ff1487f8
 begin
 	function expected_value(X, pX) 
@@ -194,6 +200,7 @@ end
 # ╟─6720d9b4-4a00-4241-9163-dcace8425763
 # ╠═6fde0db6-702d-42e0-8e96-d4fc1c558f0e
 # ╠═1261eee6-70f4-4810-9c65-064e55db8769
+# ╟─2c5522ad-35a0-4b93-969a-3c9c38c86de4
 # ╠═960f0a20-84ab-413d-b85d-47e9ff1487f8
 # ╠═41e1f89e-c253-4710-a28c-7dad9220b81b
 # ╠═c13d397d-aed8-410e-950d-6d734b41b6d1
