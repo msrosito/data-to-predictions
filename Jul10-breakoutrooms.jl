@@ -70,8 +70,8 @@ grad_desc parameters:
 
 # ╔═╡ a72971a8-4306-4042-88fa-296048f3fd10
 function grad_desc1d(x, α, n_iter)
-	for _ in 1:n_iter
-##		complete x update
+	for _ in 1:n_iter  ## the notation for _ in 1:n_iter means that the code inside the loop will be repeated n_iter times
+		##		complete x update
 	end
 #	return x
 end
