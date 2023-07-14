@@ -78,10 +78,19 @@ md"""
 
 """
 
+# ╔═╡ a0dbce42-db41-4d6f-8bbd-a11356dd1dc5
+begin
+	P(Θ) = perceptron.(x, (Θ,)) # the broadcast operation (.) is applied over x, and theta is fixed
+    loss(Θ) ## complete
+end
+
 # ╔═╡ a1454486-7b08-4f2d-a0fc-fb1a149eaac2
 md"""
 Gradient
 """
+
+# ╔═╡ 6f36f492-68f2-48d2-ad05-2914f701c90d
+∇loss(Θ) = Zygote.gradient(loss, Θ)[1]
 
 # ╔═╡ 128525f8-5eb5-4bbb-a4a3-5fff9d422002
 md"""
@@ -91,9 +100,9 @@ md"""
 
 # ╔═╡ 955a808f-96fc-4fdd-abe6-b8f71123103f
 begin
-	function grad_desc(θ, α, n_iters) # Theta is the initial guess which is updated 	by  the function
+	function grad_desc(Θ α, n_iters) # Theta is the initial guess which is updated 	by  the function
 		## complete
-		return θ
+		return Θ
 	end
 	
 	###### Training
@@ -103,15 +112,6 @@ begin
 	Θ = grad_desc([-1, 3], α, n_iters)
 end
 
-# ╔═╡ a0dbce42-db41-4d6f-8bbd-a11356dd1dc5
-begin
-	P(Θ) = perceptron.(x, (Θ,)) # the broadcast operation (.) is applied over x, and theta is fixed
-    loss(Θ) ## complete
-end
-
-# ╔═╡ 6f36f492-68f2-48d2-ad05-2914f701c90d
-∇loss = Zygote.gradient(loss, Θ)[1]
-
 # ╔═╡ 44b9efee-477c-4673-96fe-479864cf7931
 md"""
 Loss function after training
@@ -119,6 +119,14 @@ Loss function after training
 
 # ╔═╡ ee698ee2-6e12-4b76-8720-bcb3cc683768
 loss(Θ)
+
+# ╔═╡ 764acce0-c7a6-4ec6-8ac3-e89b5ac91546
+md"""
+Parameters after training
+"""
+
+# ╔═╡ 0bcf6f6d-e61d-4383-9e45-fe643ba46228
+Θ
 
 # ╔═╡ b2af0915-c05e-40f9-9670-73e38e94f81c
 md"""
@@ -1271,6 +1279,8 @@ version = "1.4.1+0"
 # ╠═955a808f-96fc-4fdd-abe6-b8f71123103f
 # ╟─44b9efee-477c-4673-96fe-479864cf7931
 # ╠═ee698ee2-6e12-4b76-8720-bcb3cc683768
+# ╟─764acce0-c7a6-4ec6-8ac3-e89b5ac91546
+# ╠═0bcf6f6d-e61d-4383-9e45-fe643ba46228
 # ╟─b2af0915-c05e-40f9-9670-73e38e94f81c
 # ╠═b67682d1-181c-4f54-b548-48cb138f4efc
 # ╟─00000000-0000-0000-0000-000000000001
