@@ -200,8 +200,96 @@ where $W^{(3)} \in \mathbb{R}^{1 \times 2}$ and $b^{(3)} \in \mathbb{R}^{1 \time
 
 """
 
-# ╔═╡ 4de6a4c4-b442-496a-8313-ca843467dec9
-model([-2,2])
+# ╔═╡ 6808744e-c83d-4189-be36-476af2d3b4c8
+model([Float32(-0.5), Float32(0.5)])
+
+# ╔═╡ 7788eb01-2d2a-4185-8b43-8dacf18bf2be
+md"""
+Check that the number of parameters in each layer makes sense
+"""
+
+# ╔═╡ 0101312c-9acc-466a-bebe-b0b366b59ad3
+model
+
+# ╔═╡ 90ac6f48-9cb5-4e8f-99ee-928d4dd80a6c
+params = Flux.params(model)
+
+# ╔═╡ 6ca308b7-a379-47da-be9d-8a6183352547
+begin
+	W1 = params[1]
+	b1 = params[2]
+	W2 = params[3]
+	b2 = params[4]
+	W3 = params[5]
+	b3 = params[6]
+end
+
+# ╔═╡ d1886fd5-4e05-4884-b8ab-15a802e04845
+md"""
+##### Breakout room activity
+"""
+
+# ╔═╡ 1c1c4235-9abd-4154-8915-0162265fcc50
+md"""
+**Task 1:** Print the size of each of the weight matrices and bias vectors and see that the multiplications make sense
+"""
+
+# ╔═╡ 6f74546d-da85-4f7d-b73e-2a86083e225c
+md"""
+**Task 2:** Complete the following cell:
+For x0, compute the predicion obtained from the MLP using the weights and bias and the formula above (output(3) = ...)
+"""
+
+# ╔═╡ 27976638-ff23-449d-8da7-5562352aa980
+begin
+	x0 = [Float32(-0.5), Float32(0.5)]
+	## after the first connection 
+	#output1 = 
+	## after the second connection
+	#output2 = 
+	## after the third connection
+	#output3 = 
+end
+
+# ╔═╡ 3ba59f31-137d-4bdf-8714-d05f862ebb78
+md"""
+Check
+"""
+
+# ╔═╡ fc50442b-0b0d-4675-b9cf-64dc1434691d
+model(x0)
+
+# ╔═╡ 9b58b734-be88-47b0-a698-f33b040b3c28
+md"""
+**Task 3:** Complete the following function that takes an input (similar to x0) and the parameters of a model and returns the prediction of the MLP. The idea is the same than before, but this function may be used for MLPs with different depths and widths. 
+
+Take into account that "params" is a vector of matrices (weights) and vectors biases)
+
+params[k] is a matrix of weights if k is odd
+
+params[k] is a vector of biases if k is even
+"""
+
+# ╔═╡ 6a772013-2095-45f1-811b-c3f562741535
+function predict(input, params)
+	X = input
+	for j in 1:2:length(params) # for each connection you need the matrix of weights and the vector of biases, that's why you use a step = 2
+		X # = complete
+	end
+	return X
+end
+
+# ╔═╡ 0a746618-569d-4d91-a359-59c57988f5a2
+md"""
+**Task 4:** Check your results
+"""
+
+# ╔═╡ fe6e6a9b-871d-44ae-91e6-06945ffc1ffd
+begin
+	inputs = [ [Float32(-0.5), Float32(0.5)],  [Float32(1), Float32(1)]]
+	predict.(inputs, (params,)) # the broadcast operation (.) is applied over inputs, and params is fixed)
+	model.([[Float32(-0.5), Float32(0.5)], [Float32(1), Float32(1)]])
+end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -601,15 +689,15 @@ version = "0.21.4"
 
 [[deps.GR]]
 deps = ["Artifacts", "Base64", "DelimitedFiles", "Downloads", "GR_jll", "HTTP", "JSON", "Libdl", "LinearAlgebra", "Pkg", "Preferences", "Printf", "Random", "Serialization", "Sockets", "TOML", "Tar", "Test", "UUIDs", "p7zip_jll"]
-git-tree-sha1 = "8e2d86e06ceb4580110d9e716be26658effc5bfd"
+git-tree-sha1 = "8b8a2fd4536ece6e554168c21860b6820a8a83db"
 uuid = "28b8d3ca-fb5f-59d9-8090-bfdbd6d07a71"
-version = "0.72.8"
+version = "0.72.7"
 
 [[deps.GR_jll]]
 deps = ["Artifacts", "Bzip2_jll", "Cairo_jll", "FFMPEG_jll", "Fontconfig_jll", "GLFW_jll", "JLLWrappers", "JpegTurbo_jll", "Libdl", "Libtiff_jll", "Pixman_jll", "Qt5Base_jll", "Zlib_jll", "libpng_jll"]
-git-tree-sha1 = "da121cbdc95b065da07fbb93638367737969693f"
+git-tree-sha1 = "19fad9cd9ae44847fe842558a744748084a722d1"
 uuid = "d2c73de3-f751-5644-a686-071e5b155ba9"
-version = "0.72.8+0"
+version = "0.72.7+0"
 
 [[deps.Gettext_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "JLLWrappers", "Libdl", "Libiconv_jll", "Pkg", "XML2_jll"]
@@ -1597,6 +1685,20 @@ version = "1.4.1+0"
 # ╠═ee83cbe3-54d7-42e8-9b53-104e5f608b3c
 # ╠═da280f10-3ae2-4999-921a-e1cab044d62a
 # ╟─245e1c02-4565-4a14-b204-3c70611c6a7f
-# ╠═4de6a4c4-b442-496a-8313-ca843467dec9
+# ╠═6808744e-c83d-4189-be36-476af2d3b4c8
+# ╟─7788eb01-2d2a-4185-8b43-8dacf18bf2be
+# ╟─0101312c-9acc-466a-bebe-b0b366b59ad3
+# ╠═90ac6f48-9cb5-4e8f-99ee-928d4dd80a6c
+# ╠═6ca308b7-a379-47da-be9d-8a6183352547
+# ╟─d1886fd5-4e05-4884-b8ab-15a802e04845
+# ╟─1c1c4235-9abd-4154-8915-0162265fcc50
+# ╟─6f74546d-da85-4f7d-b73e-2a86083e225c
+# ╠═27976638-ff23-449d-8da7-5562352aa980
+# ╟─3ba59f31-137d-4bdf-8714-d05f862ebb78
+# ╠═fc50442b-0b0d-4675-b9cf-64dc1434691d
+# ╟─9b58b734-be88-47b0-a698-f33b040b3c28
+# ╠═6a772013-2095-45f1-811b-c3f562741535
+# ╟─0a746618-569d-4d91-a359-59c57988f5a2
+# ╠═fe6e6a9b-871d-44ae-91e6-06945ffc1ffd
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
