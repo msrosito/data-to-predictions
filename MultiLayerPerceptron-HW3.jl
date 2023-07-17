@@ -40,7 +40,7 @@ begin
 	# a grid is used to evaluate g in each possible pair	
 	X = [x for x in xr for y in yr]
 	Y = [y for x in xr for y in yr]
-	Z = g.(X,Y) .+ 0.01 * randn(1)[1]
+	Z = g.(X,Y) .+ 0.01 * randn(length(X))
 
 	println("About the grid: ")
 	println("Lenght of xr and yr: ", length(xr))
@@ -134,7 +134,7 @@ Training:
 # ╔═╡ 60669985-9680-4db6-b387-a7a85d2b65aa
 begin 
 	# defining loss
-	loss(m, x, y) = Flux.mse(first.(m.(x_train)), y) # broadcast operation: m is evaluated in each component of the vector 
+	loss(m, x, y) = Flux.mse(first.(m.(x)), y) # broadcast operation: m is evaluated in each component of the vector 
 
 	# defining optimizer
 	optimizer = Descent(0.2) # 0.2 is the learning rate
