@@ -40,7 +40,7 @@ begin
 	# a grid is used to evaluate g in each possible pair	
 	X = [x for x in xr for y in yr]
 	Y = [y for x in xr for y in yr]
-	Z = g.(X,Y) .+ 0.01 * randn(length(X))
+	Z = g.(X,Y) + 0.01 * randn(length(X))
 
 	println("About the grid: ")
 	println("Lenght of xr and yr: ", length(xr))
@@ -234,6 +234,16 @@ md"""
 **Task 1:** Print the size of each of the weight matrices and bias vectors and see that the multiplications make sense
 """
 
+# ╔═╡ 99121a06-6e60-40f4-bca0-3cfee03cd206
+begin
+	println("W1: ", size(W1))
+	println("b1: ", size(b1))
+	println("W2: ", size(W2))
+	println("b2: ", size(b2))
+	println("W3: ", size(W3))
+	println("b3: ", size(b3))
+end
+
 # ╔═╡ 6f74546d-da85-4f7d-b73e-2a86083e225c
 md"""
 **Task 2:** Complete the following cell:
@@ -244,11 +254,11 @@ For x0, compute the predicion obtained from the MLP using the weights and bias a
 begin
 	x0 = [Float32(-0.5), Float32(0.5)]
 	## after the first connection 
-	#output1 = 
+	output1 = σ.(W1 * x0 + b1)
 	## after the second connection
-	#output2 = 
+	output2 = σ.(W2 * output1 + b2)
 	## after the third connection
-	#output3 = 
+	output3 = σ.(W3 * output2 + b3)
 end
 
 # ╔═╡ 3ba59f31-137d-4bdf-8714-d05f862ebb78
@@ -274,7 +284,7 @@ params[k] is a vector of biases if k is even
 function predict(input, params)
 	X = input
 	for j in 1:2:length(params) # for each connection you need the matrix of weights and the vector of biases, that's why you use a step = 2
-		X # = complete
+		X = σ.(params[j] * X+ params[j + 1])
 	end
 	return X
 end
@@ -607,9 +617,9 @@ uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
 
 [[deps.FillArrays]]
 deps = ["LinearAlgebra", "Random", "SparseArrays", "Statistics"]
-git-tree-sha1 = "e5556303fd8c9ad4a8fceccd406ef3433ddb4c45"
+git-tree-sha1 = "f0af9b12329a637e8fba7d6543f915fff6ba0090"
 uuid = "1a297f60-69ca-5386-bcde-b61e274b549b"
-version = "1.4.0"
+version = "1.4.2"
 
 [[deps.FixedPointNumbers]]
 deps = ["Statistics"]
@@ -1283,14 +1293,14 @@ version = "0.1.15"
 
 [[deps.StaticArrays]]
 deps = ["LinearAlgebra", "Random", "StaticArraysCore", "Statistics"]
-git-tree-sha1 = "fffc14c695c17bfdbfa92a2a01836cdc542a1e46"
+git-tree-sha1 = "9cabadf6e7cd2349b6cf49f1915ad2028d65e881"
 uuid = "90137ffa-7385-5640-81b9-e52037218182"
-version = "1.6.1"
+version = "1.6.2"
 
 [[deps.StaticArraysCore]]
-git-tree-sha1 = "1d5708d926c76a505052d0d24a846d5da08bc3a4"
+git-tree-sha1 = "36b3d696ce6366023a0ea192b4cd442268995a0d"
 uuid = "1e83bf80-4336-4d27-bf5d-d5a4f845583c"
-version = "1.4.1"
+version = "1.4.2"
 
 [[deps.Statistics]]
 deps = ["LinearAlgebra", "SparseArrays"]
@@ -1359,10 +1369,10 @@ uuid = "3bb67fe8-82b1-5028-8e26-92a6c54297fa"
 version = "0.9.13"
 
 [[deps.Transducers]]
-deps = ["Adapt", "ArgCheck", "BangBang", "Baselet", "CompositionsBase", "DefineSingletons", "Distributed", "InitialValues", "Logging", "Markdown", "MicroCollections", "Requires", "Setfield", "SplittablesBase", "Tables"]
-git-tree-sha1 = "a66fb81baec325cf6ccafa243af573b031e87b00"
+deps = ["Adapt", "ArgCheck", "BangBang", "Baselet", "CompositionsBase", "ConstructionBase", "DefineSingletons", "Distributed", "InitialValues", "Logging", "Markdown", "MicroCollections", "Requires", "Setfield", "SplittablesBase", "Tables"]
+git-tree-sha1 = "53bd5978b182fa7c57577bdb452c35e5b4fb73a5"
 uuid = "28d57a85-8fef-5791-bfe6-a80928e7c999"
-version = "0.4.77"
+version = "0.4.78"
 
 [[deps.URIs]]
 git-tree-sha1 = "074f993b0ca030848b897beff716d93aca60f06a"
@@ -1692,6 +1702,7 @@ version = "1.4.1+0"
 # ╠═6ca308b7-a379-47da-be9d-8a6183352547
 # ╟─d1886fd5-4e05-4884-b8ab-15a802e04845
 # ╟─1c1c4235-9abd-4154-8915-0162265fcc50
+# ╠═99121a06-6e60-40f4-bca0-3cfee03cd206
 # ╟─6f74546d-da85-4f7d-b73e-2a86083e225c
 # ╠═27976638-ff23-449d-8da7-5562352aa980
 # ╟─3ba59f31-137d-4bdf-8714-d05f862ebb78
