@@ -62,20 +62,18 @@ sigmoid(t) = 1 / (1 + exp(-t))
 
 # ╔═╡ 44959e37-9c8b-48f4-b730-31fa5742ed05
 md"""
-Complete to compute predicted probabilities = sigmoid(intercept + slope)
+Complete to compute predicted probabilities = sigmoid(intercept + slope * x)
 
 Consider one independent variable and the vector of parameters $\Theta$ = [intercept, slope]
 
 """
 
 # ╔═╡ a6c45950-17cc-412e-8b5e-12b8c7ccb571
-#=
 function p(x, Θ)
-	linearf = # linear function
-	pred_prob = # sigmoid
+	linearf = Θ[1] + Θ[2] * x # linear function
+	pred_prob = sigmoid(linearf) # sigmoid
 	return pred_prob
 end
-=#
 
 # ╔═╡ f7131d7d-b7d2-4de4-bce9-1811364838e8
 md"""
@@ -86,15 +84,15 @@ md"""
 md"""
 For a single sample, define the function logloss
 
-logloss(x, y, Θ) $= - y \ln(p(x, \Theta)) - (1-y) (1-p(x,\Theta))$
+logloss(x, y, Θ) $= - y \ln(p(x, \Theta)) - (1-y) \ln(1-p(x,\Theta))$
 """
 
 # ╔═╡ 91373c89-c65d-49a5-b64d-14b008af77dd
-#=
 function logloss(x, y, Θ)
-	pred_prob = ## compute using p
-	l = ## logloss function
-=#
+	pred_prob = p(x, Θ) ## compute using p
+	l = -(y * log(pred_prob) + (1 - y) * log(1 - pred_prob)) ## logloss function
+	return l
+end
 
 # ╔═╡ 9efdbb70-70f4-44ed-b581-c9a3a4f16b57
 md"""
