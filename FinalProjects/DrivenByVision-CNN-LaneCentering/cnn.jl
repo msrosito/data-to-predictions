@@ -6,5 +6,5 @@ lenet = Flux.@autosize (28, 28, 1, 1) Chain(
     Flux.flatten,
     Dense(_ => 120, relu),
     Dense(_ => 84, relu), 
-    Dense(_ => 10),
+    Dense(_ => 1),
 )
