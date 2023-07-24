@@ -74,7 +74,7 @@ begin
 	output_data = output_data[indexes]
 
 	## Training and test
-	ntrain = Int(floor(0.8 * nobs)) # rounds a real number down to the nearest integer less than or equal to that number
+	ntrain = Int(floor(0.75 * nobs)) # rounds a real number down to the nearest integer less than or equal to that number
 	input_data_train = input_data[[1:1:ntrain;]]
 	output_data_train = output_data[[1:1:ntrain;]]
 	input_data_test = input_data[[ntrain+1:1:nobs;]]
@@ -145,10 +145,10 @@ begin
 	    Flux.train!(loss, model, data_train, optimizer)
 	    
 	    # Accumulate losses
-	    l = loss(model, input_data_train, output_data_train)
-	    push!(losses_train, l)
-		l = loss(model, input_data_test, output_data_test)
-		push!(losses_test, l)
+	    l1 = loss(model, input_data_train, output_data_train)
+	    push!(losses_train, l1)
+		l2 = loss(model, input_data_test, output_data_test)
+		push!(losses_test, l2)
 		
 	end
 end
