@@ -5,7 +5,7 @@ using Markdown
 using InteractiveUtils
 
 # ╔═╡ ecc29c33-5423-4d53-a47a-4531313dd054
-using Plots, Flux , Permutations
+using Plots, Flux , Random
 
 # ╔═╡ 5d0c4642-29c2-11ee-30f0-ff3a71ed1698
 md"""
@@ -69,10 +69,9 @@ begin
 
 	# shuffle data
 	nobs = length(Z)
-	indexes = RandomPermutation(nobs)
-	indexes = [ind for ind in indexes]
+	indexes = randperm(nobs)
 	input_data = input_data[indexes]
-	output_data[indexes]
+	output_data = output_data[indexes]
 
 	## Training and test
 	ntrain = Int(floor(0.8 * nobs)) # rounds a real number down to the nearest integer less than or equal to that number
@@ -114,7 +113,7 @@ Training:
 
 - Loss function: mse 
 - Optimizer: gradient descent
-- Number of epochs: 700
+- Number of epochs: 200
 
 """
 
@@ -160,33 +159,15 @@ begin
 	plot!(losses_test, label = "test set")
 end
 
-# ╔═╡ 3ea0bd1c-e8fb-41f9-9bd6-70c1dc8f123d
-md"""
-To prevent overfitting, we should have stopped the training after around 40 epochs
-"""
-
-# ╔═╡ 68723c5c-fdf3-4eb3-a745-bbc85d034bf3
-begin
-	println("Loss (training) after 40 epochs: ", losses_train[40])
-	println("Loss (test) after 40 epochs: ", losses_train[40])
-end
-
-# ╔═╡ 9a4a652a-92f9-4eb3-86d4-679947c1b766
-begin
-	println("Loss (training) after 100 epochs: ", losses_train[100])
-	println("Loss (test) after 100 epochs: ", losses_test[100])
-end
-
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
 Flux = "587475ba-b771-5e3f-ad9e-33799f191a9c"
-Permutations = "2ae35dd2-176d-5d53-8349-f30d82d94d4f"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
+Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 
 [compat]
 Flux = "~0.13.17"
-Permutations = "~0.4.16"
 Plots = "~1.38.16"
 """
 
@@ -196,7 +177,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.8.5"
 manifest_format = "2.0"
-project_hash = "5b86dca0508319dda3c26c0231d8b1178b646739"
+project_hash = "897ec0ea8591dfc05c63221730985f2a76b7b859"
 
 [[deps.AbstractFFTs]]
 deps = ["ChainRulesCore", "LinearAlgebra"]
@@ -347,11 +328,6 @@ deps = ["ColorTypes", "FixedPointNumbers", "Reexport"]
 git-tree-sha1 = "fc08e5930ee9a4e03f84bfb5211cb54e7769758a"
 uuid = "5ae59095-9a9b-59fe-a467-6f913c188581"
 version = "0.12.10"
-
-[[deps.Combinatorics]]
-git-tree-sha1 = "08c8b6831dc00bfea825826be0bc8336fc369860"
-uuid = "861a8166-3701-5b0c-9a16-15d98fcdc6aa"
-version = "1.0.2"
 
 [[deps.CommonSubexpressions]]
 deps = ["MacroTools", "Test"]
@@ -690,9 +666,9 @@ version = "0.2.4"
 
 [[deps.KernelAbstractions]]
 deps = ["Adapt", "Atomix", "InteractiveUtils", "LinearAlgebra", "MacroTools", "PrecompileTools", "Requires", "SparseArrays", "StaticArrays", "UUIDs", "UnsafeAtomics", "UnsafeAtomicsLLVM"]
-git-tree-sha1 = "6d08ca80b621635fed9cdfeb9a4280a574020bf3"
+git-tree-sha1 = "4c5875e4c228247e1c2b087669846941fb6e0118"
 uuid = "63c18a36-062a-441e-b654-da1e3ab1ce7c"
-version = "0.9.7"
+version = "0.9.8"
 
 [[deps.LAME_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -985,12 +961,6 @@ deps = ["Dates", "PrecompileTools", "UUIDs"]
 git-tree-sha1 = "4b2e829ee66d4218e0cef22c0a64ee37cf258c29"
 uuid = "69de0a69-1ddd-5017-9359-2bf0b02dc9f0"
 version = "2.7.1"
-
-[[deps.Permutations]]
-deps = ["Combinatorics", "LinearAlgebra", "Random"]
-git-tree-sha1 = "6e6cab1c54ae2382bcc48866b91cf949cea703a1"
-uuid = "2ae35dd2-176d-5d53-8349-f30d82d94d4f"
-version = "0.4.16"
 
 [[deps.Pipe]]
 git-tree-sha1 = "6842804e7867b115ca9de748a0cf6b364523c16d"
@@ -1579,8 +1549,5 @@ version = "1.4.1+0"
 # ╟─ea948f6d-05f7-4339-815a-f44492bd9f56
 # ╠═16ec8ecd-cc7e-4aae-9e47-b5eae9def72d
 # ╠═3965e20c-b044-466e-8b68-b8158e20dc6f
-# ╟─3ea0bd1c-e8fb-41f9-9bd6-70c1dc8f123d
-# ╠═68723c5c-fdf3-4eb3-a745-bbc85d034bf3
-# ╠═9a4a652a-92f9-4eb3-86d4-679947c1b766
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
