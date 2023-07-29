@@ -152,7 +152,7 @@ begin
 	
 	optimizerl = Flux.setup(Adam(1e-3), modellayer)
 	
-	losseslayer_train, losseslayer_test = training(modellayer, optimizerl, 2000)
+	losseslayer_train, losseslayer_test = training(modellayer, optimizerl, nepoch)
 
 	println(Flux.params(modellayer))
 
@@ -196,7 +196,7 @@ begin
 	
 	optimizern = Flux.setup(Adam(1e-3), modelneuron)
 	
-	lossesneuron_train, lossesneuron_test = training(modelneuron, optimizern, 2000)
+	lossesneuron_train, lossesneuron_test = training(modelneuron, optimizern, nepoch)
 
 	println(Flux.params(modelneuron))
 
